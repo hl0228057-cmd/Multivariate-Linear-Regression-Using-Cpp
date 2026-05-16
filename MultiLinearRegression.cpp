@@ -84,7 +84,7 @@ class multiLinearRegressionModel {
             int n = normalizedInputs.size();
 
             // training values
-            int iterations = 3e+4;
+            int iterations = 7.5e+3;
             double learningRate = 3e-3;
 
             double currentLoss = 0;
@@ -148,31 +148,41 @@ class multiLinearRegressionModel {
 
         double predict(const vector<double>& features) {
             vector<double> normalizedInput = normalizeOneInput(features);
-
             return clamp(dotProduct(weights, normalizedInput) + bias, 0.0, 100.0);
         }
 };
 
 int main() {
     vector<vector<double>> inputs = {
-        {8, 2, 1, 4},     // good sleep, low study, lots of gaming
-        {7, 4, 1, 2},     // balanced
-        {6, 6, 0.5, 1},   // high study, low gaming
-        {5, 7, 0.5, 0.5}, // very high study, almost no gaming
-        {9, 1, 2, 5},     // great sleep/activity, too much gaming
-        {7, 5, 1.5, 1},   // healthy balance
-        {4, 2, 0.5, 6}    // poor habits, excessive gaming
+        {8, 2, 1, 4},      // decent habits, moderate gaming
+        {7, 4, 1, 2},      // balanced
+        {6, 6, 0.5, 1},    // high study
+        {5, 7, 0.5, 0.5},  // intense studying
+        {9, 1, 2, 5},      // great sleep/activity but distracted
+        {7, 5, 1.5, 1},    // healthy balance
+        {4, 2, 0.5, 6},    // poor habits
+        {8, 3, 1, 3},      // average-good student
+        {8, 5, 1, 2},      // strong balance
+        {6, 3, 2, 3},      // decent but inconsistent
+        {7, 2, 2, 4},      // relaxed but functional
+        {9, 4, 2, 1},      // very healthy/studious
+        {5, 5, 1, 4},      // studies but poor balance
+        {6, 1, 1, 5},      // distracted
+        {8, 6, 1, 1},      // excellent discipline
+        {7, 3, 0.5, 2},    // normal student
+        {6, 4, 1.5, 2},    // decent consistency
+        {9, 2, 2, 2},      // healthy but not obsessive
+        {5, 3, 0.5, 5},    // mediocre habits
+        {8, 4, 2, 3}       // balanced lifestyle
     };
 
-    int n = inputs.size();
-
     vector<double> expectedOutputs = {
-        78, 86, 92, 90, 75, 89, 62
+        82, 86, 92, 94, 78, 89, 60, 84, 91, 80, 79, 93, 81, 68, 96, 83, 85, 87, 70, 88
     };
 
     multiLinearRegressionModel model;
     model.fit(inputs, expectedOutputs);
-    cout << model.predict({8, 2, 1, 4}) << "\n";
+    cout << model.predict({8, 3, 1, 3}) << "\n";
 
     return 0;
 }

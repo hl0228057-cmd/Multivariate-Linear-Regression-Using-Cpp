@@ -1,4 +1,4 @@
-# Multivariate-Linear-Regression-Using-Cpp
+# Multivariate Linear Regression Using C++
 
 This project was quite a leap in scale compared to my original Basic Linear Regression Using C++:
 https://github.com/hl0228057-cmd/Basic-Linear-Regression-Using-Cpp
